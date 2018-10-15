@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Demo from './location';
 import Map from './Map';
 
 class App extends Component {
@@ -44,6 +45,7 @@ class App extends Component {
             </li>
           ))}
         </ul>
+        <Demo />
       </div>
     );
   }
