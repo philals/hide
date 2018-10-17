@@ -18,15 +18,10 @@ export class LocationMap extends React.Component {
         {this.props.coords
           ? <div>
               <Map
-                markersData={[
-                  {
-                    latLng: {
-                      lat: this.props.coords.latitude,
-                      lng: this.props.coords.longitude,
-                    },
-                    alt: 'Your location',
-                  },
-                ]}
+                currentLocation={{
+                  lat: this.props.coords.latitude,
+                  lng: this.props.coords.longitude,
+                }}
               />
               <table>
                 <tbody>
