@@ -7,6 +7,10 @@ const style = {
 };
 
 class Map extends React.Component {
+  state = {
+    markers: [],
+  };
+
   componentDidMount () {
     // create map
     this.map = L.map ('map', {
@@ -24,40 +28,27 @@ class Map extends React.Component {
     this.addCurrentLocationMarker (this.props.currentLocation);
   }
 
-  // componentDidUpdate({markersData}) {
-  //   // check if data has changed
-  //   if (this.props.markersData !== markersData) {
-  //     this.updateMarkers (this.props.markersData);
-  //   }
-  // }
-
-  addCurrentLocationMarker (marker) {
-    this.layer.clearLayers ();
-    L.marker (marker, {
-      title: 'Your location',
-      alt: 'Your location',
-    }).addTo (this.layer);
+  componentDidUpdate (props) {
+    this.updateMarkers ();
   }
 
-  // updateMarkers (markersData) {
-  //   // var myIcon = L.icon ({
-  //   //   iconUrl: 'https://unpkg.com/leaflet@1.3.4/dist/images/marker-icon.png',
-  //   //   // iconSize: [38, 95],
-  //   //   // iconAnchor: [22, 94],
-  //   //   // popupAnchor: [-3, -76],
-  //   //   // // shadowUrl: 'my-icon-shadow.png',
-  //   //   // shadowSize: [68, 95],
-  //   //   // shadowAnchor: [22, 94],
-  //   // });
+  addCurrentLocationMarker (marker) {
+    this.setState ({
+      markers: [
+        L.marker (marker, {
+          title: 'Your location',
+          alt: 'Your location',
+        }),
+      ],
+    });
+  }
 
-  //   this.layer.clearLayers ();
-  //   markersData.forEach (marker => {
-  //     L.marker (marker.latLng, {
-  //       title: marker.title,
-  //       alt: marker.alt,
-  //     }).addTo (this.layer);
-  //   });
-  // }
+  updateMarkers () {
+    this.layer.clearLayers ();
+    this.state.markers.forEach (marker => {
+      marker.addTo (this.layer);
+    });
+  }
 
   render () {
     return <div id="map" style={style} />;

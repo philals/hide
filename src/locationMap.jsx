@@ -33,16 +33,6 @@ export class LocationMap extends React.Component {
                     <td>longitude</td>
                     <td>{this.props.coords.longitude}</td>
                   </tr>
-                  <tr>
-                    <td>altitude</td>
-                    <td>{this.props.coords.altitude}</td>
-                  </tr>
-                  <tr>
-                    <td>heading</td><td>{this.props.coords.heading}</td>
-                  </tr>
-                  <tr>
-                    <td>speed</td><td>{this.props.coords.speed}</td>
-                  </tr>
                 </tbody>
               </table>
             </div>
