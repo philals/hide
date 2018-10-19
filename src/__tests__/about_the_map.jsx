@@ -37,11 +37,13 @@ describe ('Map will', () => {
 
   describe ('when hiding something', () => {
     test ('saves the state of the game', () => {
+      // @ts-ignore
       global.window.history.pushState = jest.fn ();
       const {getByText} = renderWithLocation (10, 10);
 
       fireEvent.click (getByText ('Hide something'));
 
+      // @ts-ignore
       expect (global.window.history.pushState).toBeCalledWith (
         'page',
         'Title',
