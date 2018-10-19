@@ -14,10 +14,8 @@ export class MapState extends React.Component {
 
     // this.setState (newState);
 
-    window.open (
-      `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`,
-      '_blank'
-    );
+    let newUrl = `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`;
+    window.history.pushState ('page', 'Title', newUrl);
   }
 
   render () {

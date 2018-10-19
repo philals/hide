@@ -36,15 +36,16 @@ describe ('Map will', () => {
   });
 
   describe ('when hiding something', () => {
-    test ('opens the page in a new tab', () => {
-      global.window.open = jest.fn ();
+    test ('saves the state of the game', () => {
+      global.window.history.pushState = jest.fn ();
       const {getByText} = renderWithLocation (10, 10);
 
       fireEvent.click (getByText ('Hide something'));
 
-      expect (global.window.open).toBeCalledWith (
-        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`,
-        '_blank'
+      expect (global.window.history.pushState).toBeCalledWith (
+        'page',
+        'Title',
+        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`
       );
     });
   });
