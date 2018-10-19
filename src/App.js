@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import LocationMap from './locationMap';
+import MapState from './MapState';
 
 class App extends Component {
   render () {
-    return <LocationMap />;
+    return <MapState />;
   }
 }
 

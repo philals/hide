@@ -8,6 +8,7 @@ const style = {
 
 class Map extends React.Component {
   state = {
+    currentLocationMarker: null,
     markers: [],
   };
 
@@ -34,12 +35,11 @@ class Map extends React.Component {
 
   addCurrentLocationMarker (marker) {
     this.setState ({
-      markers: [
-        L.marker (marker, {
-          title: 'Your location',
-          alt: 'Your location',
-        }),
-      ],
+      currentLocationMarker: L.marker (marker, {
+        title: 'Your location',
+        alt: 'Your location',
+        draggable: true,
+      }),
     });
   }
 
@@ -48,10 +48,22 @@ class Map extends React.Component {
     this.state.markers.forEach (marker => {
       marker.addTo (this.layer);
     });
+    this.state.currentLocationMarker.addTo (this.layer);
+  }
+
+  clicky () {
+    this.props.updateLocationOfHiddenItem (
+      this.state.currentLocationMarker.getLatLng ()
+    );
   }
 
   render () {
-    return <div id="map" style={style} />;
+    return (
+      <div>
+        <div id="map" style={style} />
+        <button onClick={this.clicky.bind (this)}>Hide something</button>
+      </div>
+    );
   }
 }
 

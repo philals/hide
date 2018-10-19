@@ -2,7 +2,24 @@ import React from 'react';
 import {geolocated} from 'react-geolocated';
 import Map from './Map';
 
-export class LocationMap extends React.Component {
+export class MapState extends React.Component {
+  // state = {
+  //   locationOfHiddenItem: null,
+  // };
+
+  updateLocationOfHiddenItem (latLng) {
+    // const newState = update (this.state, {
+    //   locationOfHiddenItem: {$set: latLng},
+    // });
+
+    // this.setState (newState);
+
+    window.open (
+      `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`,
+      '_blank'
+    );
+  }
+
   render () {
     if (!this.props.isGeolocationAvailable) {
       return <div>Your browser does not support Geolocation</div>;
@@ -22,6 +39,9 @@ export class LocationMap extends React.Component {
                   lat: this.props.coords.latitude,
                   lng: this.props.coords.longitude,
                 }}
+                updateLocationOfHiddenItem={this.updateLocationOfHiddenItem.bind (
+                  this
+                )}
               />
               <table>
                 <tbody>
@@ -47,4 +67,4 @@ export default geolocated ({
     enableHighAccuracy: false,
   },
   userDecisionTimeout: 15000,
-}) (LocationMap);
+}) (MapState);

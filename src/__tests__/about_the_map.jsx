@@ -1,7 +1,7 @@
 import React from 'react';
-import {render} from 'react-testing-library';
+import {fireEvent, render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
-import {LocationMap} from '../LocationMap';
+import {MapState} from '../MapState';
 
 describe ('Map will', () => {
   describe ('while location is unavaliable', () => {
@@ -34,6 +34,20 @@ describe ('Map will', () => {
       getByAltText ('Your location');
     });
   });
+
+  describe ('when hiding something', () => {
+    test ('opens the page in a new tab', () => {
+      global.window.open = jest.fn ();
+      const {getByText} = renderWithLocation (10, 10);
+
+      fireEvent.click (getByText ('Hide something'));
+
+      expect (global.window.open).toBeCalledWith (
+        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`,
+        '_blank'
+      );
+    });
+  });
 });
 
 function renderWithLocation (
@@ -61,5 +75,5 @@ function renderWithLocation (
     };
   }
 
-  return render (<LocationMap {...geoProps} />);
+  return render (<MapState {...geoProps} />);
 }
