@@ -3,6 +3,7 @@ import {fireEvent, render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import history from '../history';
 import {MapState} from '../MapState';
+
 jest.mock ('../history.js');
 
 describe ('Map will', () => {
