@@ -1,7 +1,9 @@
 import React from 'react';
 import {fireEvent, render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
+import history from '../history';
 import {MapState} from '../MapState';
+jest.mock ('../history.js');
 
 describe ('Map will', () => {
   describe ('while location is unavaliable', () => {
@@ -37,18 +39,15 @@ describe ('Map will', () => {
 
   describe ('when hiding something', () => {
     test ('saves the state of the game', () => {
-      // @ts-ignore
-      global.window.history.pushState = jest.fn ();
       const {getByText} = renderWithLocation (10, 10);
 
       fireEvent.click (getByText ('Hide something'));
 
-      // @ts-ignore
-      expect (global.window.history.pushState).toBeCalledWith (
-        'page',
-        'Title',
-        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`
-      );
+      expect (
+        history.push
+      ).toBeCalledWith (`/?hiddenItemLat=${10}&hiddenItemLng=${10}`, {
+        some: 'state',
+      });
     });
   });
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import {geolocated} from 'react-geolocated';
+import history from './history';
 import Map from './Map';
 
 export class MapState extends React.Component {
@@ -15,7 +16,7 @@ export class MapState extends React.Component {
     // this.setState (newState);
 
     let newUrl = `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`;
-    window.history.pushState ('page', 'Title', newUrl);
+    history.push (newUrl, {some: 'state'});
   }
 
   render () {
