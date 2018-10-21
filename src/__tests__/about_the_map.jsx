@@ -2,9 +2,19 @@ import React from 'react';
 import {fireEvent, render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import history from '../history';
-import {MapState} from '../MapState';
+import MapState from '../MapState';
 
 jest.mock ('../history.js');
+
+jest.mock ('react-geolocated', conf => ({
+  geolocated: () => component => {
+    component.defaultProps = {
+      isGeolocationAvailable: true,
+      isGeolocationEnabled: true,
+    };
+    return component;
+  },
+}));
 
 describe ('Map will', () => {
   describe ('while location is unavaliable', () => {
@@ -14,6 +24,7 @@ describe ('Map will', () => {
       getByText ('Your browser does not support Geolocation');
     });
   });
+
   describe ('while location is disabled', () => {
     test ('display error message', () => {
       const {getByText} = renderWithLocation (null, null, true, false);
@@ -30,7 +41,7 @@ describe ('Map will', () => {
     });
   });
 
-  describe ('while location is loaded', () => {
+  describe.only ('while location is loaded', () => {
     test ('display a marker', () => {
       const {getByAltText} = renderWithLocation (10, 10);
 
@@ -78,5 +89,5 @@ function renderWithLocation (
     };
   }
 
-  return render (<MapState {...geoProps} />);
+  return render (<MapState />);
 }

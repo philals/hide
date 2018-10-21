@@ -1,9 +1,10 @@
 import React from 'react';
 import {geolocated} from 'react-geolocated';
+import {UrlQueryParamTypes} from 'react-url-query';
 import history from './history';
 import Map from './Map';
 
-export class MapState extends React.Component {
+class MapState extends React.Component {
   // state = {
   //   locationOfHiddenItem: null,
   // };
@@ -20,6 +21,7 @@ export class MapState extends React.Component {
   }
 
   render () {
+    console.log (this.props);
     if (!this.props.isGeolocationAvailable) {
       return <div>Your browser does not support Geolocation</div>;
     }
@@ -61,9 +63,26 @@ export class MapState extends React.Component {
   }
 }
 
-export default geolocated ({
+/**
+ * Specify how the URL gets decoded here. This is an object that takes the prop
+ * name as a key, and a query param specifier as the value. The query param
+ * specifier can have a `type`, indicating how to decode the value from the
+ * URL, and a `queryParam` field that indicates which key in the query
+ * parameters should be read (this defaults to the prop name if not provided).
+ */
+const urlPropsQueryConfig = {
+  hiddenItemLng: {type: UrlQueryParamTypes.number},
+  hiddenItemLat: {type: UrlQueryParamTypes.number},
+};
+
+console.log (geolocated);
+
+let located = geolocated ({
   positionOptions: {
     enableHighAccuracy: false,
   },
   userDecisionTimeout: 15000,
 }) (MapState);
+
+// export default addUrlProps ({urlPropsQueryConfig}) (located);
+export default located;
