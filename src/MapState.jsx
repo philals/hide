@@ -1,15 +1,15 @@
-import React from 'react';
-import {geolocated} from 'react-geolocated';
-import {UrlQueryParamTypes} from 'react-url-query';
-import history from './history';
-import Map from './Map';
+import React from "react";
+import { geolocated } from "react-geolocated";
+import { UrlQueryParamTypes } from "react-url-query";
+import history from "./history";
+import Map from "./Map";
 
 class MapState extends React.Component {
   // state = {
   //   locationOfHiddenItem: null,
   // };
 
-  updateLocationOfHiddenItem (latLng) {
+  updateLocationOfHiddenItem(latLng) {
     // const newState = update (this.state, {
     //   locationOfHiddenItem: {$set: latLng},
     // });
@@ -17,11 +17,10 @@ class MapState extends React.Component {
     // this.setState (newState);
 
     let newUrl = `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`;
-    history.push (newUrl, {some: 'state'});
+    history.push(newUrl, { some: "state" });
   }
 
-  render () {
-    console.log (this.props);
+  render() {
     if (!this.props.isGeolocationAvailable) {
       return <div>Your browser does not support Geolocation</div>;
     }
@@ -32,32 +31,33 @@ class MapState extends React.Component {
 
     return (
       <div>
-
-        {this.props.coords
-          ? <div>
-              <Map
-                currentLocation={{
-                  lat: this.props.coords.latitude,
-                  lng: this.props.coords.longitude,
-                }}
-                updateLocationOfHiddenItem={this.updateLocationOfHiddenItem.bind (
-                  this
-                )}
-              />
-              <table>
-                <tbody>
-                  <tr>
-                    <td>latitude</td>
-                    <td>{this.props.coords.latitude}</td>
-                  </tr>
-                  <tr>
-                    <td>longitude</td>
-                    <td>{this.props.coords.longitude}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          : <div>Getting the location data&hellip;</div>}
+        {this.props.coords ? (
+          <div>
+            <Map
+              currentLocation={{
+                lat: this.props.coords.latitude,
+                lng: this.props.coords.longitude
+              }}
+              updateLocationOfHiddenItem={this.updateLocationOfHiddenItem.bind(
+                this
+              )}
+            />
+            <table>
+              <tbody>
+                <tr>
+                  <td>latitude</td>
+                  <td>{this.props.coords.latitude}</td>
+                </tr>
+                <tr>
+                  <td>longitude</td>
+                  <td>{this.props.coords.longitude}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div>Getting the location data&hellip;</div>
+        )}
       </div>
     );
   }
@@ -71,18 +71,16 @@ class MapState extends React.Component {
  * parameters should be read (this defaults to the prop name if not provided).
  */
 const urlPropsQueryConfig = {
-  hiddenItemLng: {type: UrlQueryParamTypes.number},
-  hiddenItemLat: {type: UrlQueryParamTypes.number},
+  hiddenItemLng: { type: UrlQueryParamTypes.number },
+  hiddenItemLat: { type: UrlQueryParamTypes.number }
 };
 
-console.log (geolocated);
-
-let located = geolocated ({
+let located = geolocated({
   positionOptions: {
-    enableHighAccuracy: false,
+    enableHighAccuracy: false
   },
-  userDecisionTimeout: 15000,
-}) (MapState);
+  userDecisionTimeout: 15000
+})(MapState);
 
 // export default addUrlProps ({urlPropsQueryConfig}) (located);
 export default located;
