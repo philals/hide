@@ -17,14 +17,14 @@ export default class MyMap extends Component {
     };
   }
 
-  hiddenItemMoved(what) {
-    this.setState({
-      hiddenItemLatLng: what.target.getLatLng()
-    });
-  }
-
   hideItem() {
     this.props.updateLocationOfHiddenItem(this.state.hiddenItemLatLng);
+  }
+
+  mapMoved(what) {
+    this.setState({
+      hiddenItemLatLng: what.target.getCenter()
+    });
   }
 
   render() {
@@ -38,6 +38,7 @@ export default class MyMap extends Component {
     return (
       <div className="map-container">
         <Map
+          onMove={this.mapMoved.bind(this)}
           center={[
             this.props.currentLocation.lat,
             this.props.currentLocation.lng
@@ -57,7 +58,6 @@ export default class MyMap extends Component {
           />
 
           <Marker
-            onMoveend={this.hiddenItemMoved.bind(this)}
             position={[
               this.state.hiddenItemLatLng.lat,
               this.state.hiddenItemLatLng.lng
