@@ -1,4 +1,6 @@
+import { divIcon } from "leaflet";
 import React, { Component } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { Map, Marker, TileLayer } from "react-leaflet";
 
 export default class MyMap extends Component {
@@ -26,6 +28,13 @@ export default class MyMap extends Component {
   }
 
   render() {
+    const iconMarkup = renderToStaticMarkup(
+      <span className="fa fa-compass fa-2x" title="Your location" />
+    );
+    const customMarkerIcon = divIcon({
+      html: iconMarkup
+    });
+
     return (
       <div className="map-container">
         <Map
@@ -45,6 +54,7 @@ export default class MyMap extends Component {
             title="Your location"
             alt="Your location"
             draggable={false}
+            icon={customMarkerIcon}
           />
 
           <Marker
