@@ -25,7 +25,7 @@ jest.mock("react-geolocated", conf => ({
 }));
 
 describe("while location is loaded", () => {
-  test("display a marker", () => {
+  test("it displays your location marker", () => {
     const { getByTitle } = renderWithLocation();
 
     getByTitle("Your location");
