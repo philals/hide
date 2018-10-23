@@ -46,13 +46,12 @@ export default class MyMap extends Component {
         >
           <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
 
+          {/* //TODO: Offset this lcon */}
           <Marker
             position={[
               this.props.currentLocation.lat,
               this.props.currentLocation.lng
             ]}
-            title="Your location"
-            alt="Your location"
             draggable={false}
             icon={customMarkerIcon}
           />
