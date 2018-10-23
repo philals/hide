@@ -62,6 +62,7 @@ export default class MyMap extends Component {
               this.state.hiddenItemLatLng.lat,
               this.state.hiddenItemLatLng.lng
             ]}
+            alt={"Hidden Item"}
             draggable={true}
           />
         </Map>

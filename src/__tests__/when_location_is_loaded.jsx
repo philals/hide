@@ -32,6 +32,12 @@ describe("while location is loaded", () => {
   });
 
   describe("when hiding something", () => {
+    test("it displays your location marker", () => {
+      const { getByAltText } = renderWithLocation();
+
+      getByAltText("Hidden Item");
+    });
+
     test("saves the state of the game", () => {
       const { getByText } = renderWithLocation();
 
@@ -43,6 +49,14 @@ describe("while location is loaded", () => {
           some: "state"
         }
       );
+    });
+  });
+
+  describe("when something is hidden", () => {
+    test("it displays your location marker", () => {
+      const { getByAltText } = renderWithLocation();
+
+      expect(getByAltText("Hidden Item")).toBeNull();
     });
   });
 });
