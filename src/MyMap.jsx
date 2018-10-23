@@ -38,13 +38,21 @@ export default class MyMap extends Component {
           <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
 
           <Marker
+            position={[
+              this.props.currentLocation.lat,
+              this.props.currentLocation.lng
+            ]}
+            title="Your location"
+            alt="Your location"
+            draggable={false}
+          />
+
+          <Marker
             onMoveend={this.hiddenItemMoved.bind(this)}
             position={[
               this.state.hiddenItemLatLng.lat,
               this.state.hiddenItemLatLng.lng
             ]}
-            title="Your location"
-            alt="Your location"
             draggable={true}
           />
         </Map>
