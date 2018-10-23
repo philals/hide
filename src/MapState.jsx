@@ -2,7 +2,7 @@ import React from "react";
 import { geolocated } from "react-geolocated";
 import { UrlQueryParamTypes } from "react-url-query";
 import history from "./history";
-import Map from "./Map";
+import MyMap from "./MyMap";
 
 class MapState extends React.Component {
   // state = {
@@ -33,7 +33,7 @@ class MapState extends React.Component {
       <div>
         {this.props.coords ? (
           <div>
-            <Map
+            <MyMap
               currentLocation={{
                 lat: this.props.coords.latitude,
                 lng: this.props.coords.longitude
@@ -42,6 +42,9 @@ class MapState extends React.Component {
                 this
               )}
             />
+            <br />
+            <br />
+            <br />
             <table>
               <tbody>
                 <tr>
