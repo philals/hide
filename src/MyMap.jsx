@@ -68,8 +68,14 @@ export default class MyMap extends Component {
             />
           ) : null}
         </Map>
-
-        <button onClick={this.hideItem.bind(this)}>Hide something</button>
+        {!this.props.finderMode ? (
+          <button
+            data-testid={"hide-button"}
+            onClick={this.hideItem.bind(this)}
+          >
+            Hide something
+          </button>
+        ) : null}
         <br />
       </div>
     );

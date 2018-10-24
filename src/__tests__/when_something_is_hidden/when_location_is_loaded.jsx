@@ -48,6 +48,12 @@ describe("while location is loaded", () => {
     getByTitle("Your location");
   });
 
+  test("you cannot hide another item", () => {
+    const { queryByTestId } = renderWithLocation();
+
+    expect(queryByTestId("hide-button")).toBeNull();
+  });
+
   describe("when something is hidden", () => {
     test("it does not display hidden item marker", () => {
       const { queryByTestId } = renderWithLocation();
