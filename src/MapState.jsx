@@ -7,7 +7,8 @@ import MyMap from "./MyMap";
 
 class MapState extends React.Component {
   state = {
-    finderMode: false
+    finderMode: false,
+    newItemToHideLatLng: null
   };
 
   constructor(props) {
@@ -16,17 +17,40 @@ class MapState extends React.Component {
     if (props.hiddenItemLat) {
       this.state.finderMode = true;
     }
+
+    if (!this.state.newItemToHideLatLng && props.coords && props.coords.latitude) {
+      this.state.newItemToHideLatLng = {
+        lat: props.coords.latitude,
+        lng: props.coords.longitude
+      }
+    }
   }
 
   updateLocationOfHiddenItem(latLng) {
-    // const newState = update (this.state, {
-    //   locationOfHiddenItem: {$set: latLng},
-    // });
+    this.setState({
+      finderMode: this.state.finderMode,
+      newItemToHideLatLng: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      }
+    })
+  }
 
-    // this.setState (newState);
-
-    let newUrl = `/?hiddenItemLat=${latLng.lat}&hiddenItemLng=${latLng.lng}`;
+  hideItem() {
+    let newUrl = `/?hiddenItemLat=${this.state.newItemToHideLatLng.lat}&hiddenItemLng=${this.state.newItemToHideLatLng.lng}`;
     history.push(newUrl, { some: "state" });
+  }
+
+  componentWillReceiveProps(props) {
+    if (!this.state.newItemToHideLatLng) {
+      this.setState({
+        finderMode: this.state.finderMode,
+        newItemToHideLatLng: {
+          lat: props.coords.latitude,
+          lng: props.coords.longitude
+        }
+      })
+    }
   }
 
   render() {
@@ -49,13 +73,14 @@ class MapState extends React.Component {
               }, {
                   longitude: this.props.hiddenItemLng,
                   latitude: this.props.hiddenItemLat
-                }, 1, 0)} m</p> : null}
+                }, 1, 0)} m</p> : <button onClick={this.hideItem.bind(this)}>Hide something</button>}
             <MyMap
               finderMode={this.state.finderMode}
               currentLocation={{
                 lat: this.props.coords.latitude,
                 lng: this.props.coords.longitude
               }}
+              newItemToHideLatLng={this.state.newItemToHideLatLng}
               updateLocationOfHiddenItem={this.updateLocationOfHiddenItem.bind(
                 this
               )}

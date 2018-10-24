@@ -5,26 +5,15 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 
 export default class MyMap extends Component {
   state = {
-    newItemToHideLatLng: null,
     markers: []
   };
 
   constructor(props) {
     super(props);
-    this.state.newItemToHideLatLng = {
-      lat: this.props.currentLocation.lat,
-      lng: this.props.currentLocation.lng
-    };
-  }
-
-  hideItem() {
-    this.props.updateLocationOfHiddenItem(this.state.newItemToHideLatLng);
   }
 
   mapMoved(what) {
-    this.setState({
-      hiddenItemLatLng: what.target.getCenter()
-    });
+    this.props.updateLocationOfHiddenItem(what.target.getCenter())
   }
 
   render() {
@@ -59,24 +48,15 @@ export default class MyMap extends Component {
           {!this.props.finderMode ? (
             <Marker
               position={[
-                this.state.newItemToHideLatLng.lat,
-                this.state.newItemToHideLatLng.lng
+                this.props.newItemToHideLatLng.lat,
+                this.props.newItemToHideLatLng.lng
               ]}
               alt={"Hidden Item"}
               data-testid={"hidden-item"}
-              draggable={true}
+              draggable={false}
             />
-          ) : <button
-            data-testid={"hide-button"}
-            onClick={this.hideItem.bind(this)}
-          >
-              Hide something
-        </button>}
+          ) : null}
         </Map>
-        {!this.props.finderMode ? (
-          null
-        ) : null}
-        <br />
       </div>
     );
   }
