@@ -43,12 +43,10 @@ class MapState extends React.Component {
 
   componentWillReceiveProps(props) {
     if (!this.state.newItemToHideLatLng) {
-      this.setState({
-        finderMode: this.state.finderMode,
-        newItemToHideLatLng: {
-          lat: props.coords.latitude,
-          lng: props.coords.longitude
-        }
+
+      this.updateLocationOfHiddenItem({
+        lat: props.coords.latitude,
+        lng: props.coords.longitude
       })
     }
   }
