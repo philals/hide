@@ -42,6 +42,14 @@ class MapState extends React.Component {
       <div>
         {this.props.coords ? (
           <div>
+            {this.state.finderMode ? <p data-test-id="distance-helper">Distance to hidden item: {
+              geolib.getDistance({
+                latitude: this.props.coords.latitude,
+                longitude: this.props.coords.longitude
+              }, {
+                  longitude: this.props.hiddenItemLng,
+                  latitude: this.props.hiddenItemLat
+                }, 1, 0)} m</p> : null}
             <MyMap
               finderMode={this.state.finderMode}
               currentLocation={{
@@ -52,15 +60,6 @@ class MapState extends React.Component {
                 this
               )}
             />
-
-            {this.state.finderMode ? <p data-test-id="distance-helper">Distance to hidden item: {
-              geolib.getDistance({
-                latitude: this.props.coords.latitude,
-                longitude: this.props.coords.longitude
-              }, {
-                  longitude: this.props.hiddenItemLng,
-                  latitude: this.props.hiddenItemLat
-                }, 1, 0)} m</p> : null}
           </div>
         ) : (
             <div>Getting the location data&hellip;</div>
