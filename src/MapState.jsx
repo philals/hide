@@ -1,13 +1,21 @@
 import React from "react";
 import { geolocated } from "react-geolocated";
-import { UrlQueryParamTypes } from "react-url-query";
+import { addUrlProps, UrlQueryParamTypes } from "react-url-query";
 import history from "./history";
 import MyMap from "./MyMap";
 
 class MapState extends React.Component {
-  // state = {
-  //   locationOfHiddenItem: null,
-  // };
+  state = {
+    finderMode: false
+  };
+
+  constructor(props) {
+    super(props);
+
+    if (props.hiddenItemLat) {
+      this.state.finderMode = true;
+    }
+  }
 
   updateLocationOfHiddenItem(latLng) {
     // const newState = update (this.state, {
@@ -34,6 +42,7 @@ class MapState extends React.Component {
         {this.props.coords ? (
           <div>
             <MyMap
+              finderMode={this.state.finderMode}
               currentLocation={{
                 lat: this.props.coords.latitude,
                 lng: this.props.coords.longitude
@@ -85,5 +94,5 @@ let located = geolocated({
   userDecisionTimeout: 15000
 })(MapState);
 
-// export default addUrlProps ({urlPropsQueryConfig}) (located);
-export default located;
+export default addUrlProps({ urlPropsQueryConfig })(located);
+// export default located;

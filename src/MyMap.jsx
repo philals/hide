@@ -56,15 +56,17 @@ export default class MyMap extends Component {
             draggable={false}
             icon={customMarkerIcon}
           />
-
-          <Marker
-            position={[
-              this.state.hiddenItemLatLng.lat,
-              this.state.hiddenItemLatLng.lng
-            ]}
-            alt={"Hidden Item"}
-            draggable={true}
-          />
+          {!this.props.finderMode ? (
+            <Marker
+              position={[
+                this.state.hiddenItemLatLng.lat,
+                this.state.hiddenItemLatLng.lng
+              ]}
+              alt={"Hidden Item"}
+              data-testid={"hidden-item"}
+              draggable={true}
+            />
+          ) : null}
         </Map>
 
         <button onClick={this.hideItem.bind(this)}>Hide something</button>

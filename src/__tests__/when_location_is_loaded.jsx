@@ -51,12 +51,4 @@ describe("while location is loaded", () => {
       );
     });
   });
-
-  describe("when something is hidden", () => {
-    test("it displays your location marker", () => {
-      const { getByAltText } = renderWithLocation();
-
-      expect(getByAltText("Hidden Item")).toBeNull();
-    });
-  });
 });
