@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import MapState from "./MapState";
+import LocationState from "./LocationState";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <MapState />
+        <LocationState />
       </div>
     );
   }
