@@ -41,24 +41,33 @@ jest.mock("react-url-query", () => ({
   UrlQueryParamTypes: { number: "mocked" }
 }));
 
-describe("while location is loaded", () => {
-  test("it displays your location marker", () => {
-    const { getByTitle } = renderWithLocation();
 
-    getByTitle("Your location");
-  });
+describe("when something is hidden", () => {
+  describe("while location is loaded", () => {
+    test("it displays your location marker", () => {
+      const { getByTitle } = renderWithLocation();
 
-  test("you cannot hide another item", () => {
-    const { queryByTestId } = renderWithLocation();
+      getByTitle("Your location");
+    });
 
-    expect(queryByTestId("hide-button")).toBeNull();
-  });
-
-  describe("when something is hidden", () => {
-    test("it does not display hidden item marker", () => {
+    test("you cannot hide another item", () => {
       const { queryByTestId } = renderWithLocation();
 
-      expect(queryByTestId("hidden-item")).toBeNull();
+      expect(queryByTestId("hide-button")).toBeNull();
+    });
+
+    describe("when something is hidden", () => {
+      test("it does not display hidden item marker", () => {
+        const { queryByTestId } = renderWithLocation();
+
+        expect(queryByTestId("hidden-item")).toBeNull();
+      });
+
+      test("it gives a clue to how close you are", () => {
+        const { getByText } = renderWithLocation();
+
+        getByText("Distance to hidden item: 60701 m");
+      });
     });
   });
 });
