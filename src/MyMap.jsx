@@ -8,10 +8,6 @@ export default class MyMap extends Component {
     markers: []
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   mapMoved(what) {
     this.props.updateLocationOfHiddenItem(what.target.getCenter())
   }
