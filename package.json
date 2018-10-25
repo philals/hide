@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.3.1",
     "geolib": "^2.0.24",
     "history": "^4.7.2",
     "immutability-helper": "^2.8.1",
