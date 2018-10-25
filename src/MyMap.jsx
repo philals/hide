@@ -5,8 +5,17 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 
 export default class MyMap extends Component {
   state = {
-    markers: []
+    markers: [],
+    center: null
   };
+
+  constructor(props) {
+    super(props);
+    this.state.center = [
+      this.props.currentLocation.lat,
+      this.props.currentLocation.lng
+    ]
+  }
 
   mapMoved(what) {
     this.props.updateLocationOfHiddenItem(what.target.getCenter())
@@ -24,10 +33,7 @@ export default class MyMap extends Component {
       <div className="map-container">
         <Map
           onMove={this.mapMoved.bind(this)}
-          center={[
-            this.props.currentLocation.lat,
-            this.props.currentLocation.lng
-          ]}
+          center={this.state.center}
           zoom={13}
         >
           <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
