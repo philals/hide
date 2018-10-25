@@ -46,7 +46,7 @@ class MapState extends React.Component {
   }
 
   hideItem() {
-    let newUrl = `/?hiddenItemLat=${this.state.newItemToHideLatLng.lat}&hiddenItemLng=${this.state.newItemToHideLatLng.lng}`;
+    let newUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + `/?hiddenItemLat=${this.state.newItemToHideLatLng.lat}&hiddenItemLng=${this.state.newItemToHideLatLng.lng}`;
     copy(newUrl)
   }
 

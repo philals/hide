@@ -44,7 +44,7 @@ describe("while location is loaded", () => {
       fireEvent.click(getByText("Hide something, and copy this link to a friend"));
 
       expect(copy).toBeCalledWith(
-        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`
+        `http://localhost/?hiddenItemLat=10&hiddenItemLng=10`
       );
     });
 
