@@ -91,6 +91,7 @@ class MapState extends React.Component {
           <Typography variant="h5" gutterBottom>
             {topMessage}
           </Typography>
+          <br />
           {!this.state.finderMode ? (
             <Button
               variant="outlined"
