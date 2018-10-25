@@ -72,30 +72,28 @@ class MapState extends React.Component {
         )
       : null;
 
+    let topMessage = this.state.finderMode
+      ? `Something is hidden for you. It's ${distanceToGo}m away. Go find
+      it!`
+      : `Move the blue marker around to the location you would like to
+      hide something.`;
+
     return (
       <div>
         <Grid container justify="center">
-          {this.state.finderMode ? (
-            <Typography variant="h5" gutterBottom>
-              Something is hidden for you. It's {distanceToGo}m away. Go find
-              it!
-            </Typography>
-          ) : (
-            <div>
-              <Typography variant="body1" gutterBottom>
-                Move the blue marker around to the location you would like to
-                hide something.
-              </Typography>
-              <Button
-                variant="outlined"
-                className={classes.button}
-                color="primary"
-                onClick={this.hideItem.bind(this)}
-              >
-                Then click here to copy this link and send to a friend
-              </Button>
-            </div>
-          )}
+          <Typography variant="h5" gutterBottom>
+            {topMessage}
+          </Typography>
+          {!this.state.finderMode ? (
+            <Button
+              variant="outlined"
+              className={classes.button}
+              color="primary"
+              onClick={this.hideItem.bind(this)}
+            >
+              Then click here to copy this link and send to a friend
+            </Button>
+          ) : null}
         </Grid>
         <MyMap
           finderMode={this.state.finderMode}
