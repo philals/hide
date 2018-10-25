@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import geolib from 'geolib';
@@ -55,14 +55,14 @@ class MapState extends React.Component {
     return (
       <div>
         <Grid container justify="center">
-          {this.state.finderMode ? <p data-test-id="distance-helper">Something is hidden for you. It's {
+          {this.state.finderMode ? <Typography variant="h5" gutterBottom>Something is hidden for you. It's {
             geolib.getDistance({
               latitude: this.props.coords.latitude,
               longitude: this.props.coords.longitude
             }, {
                 longitude: this.props.hiddenItemLng,
                 latitude: this.props.hiddenItemLat
-              }, 1, 0)}m away...</p> : <Button variant="outlined" className={classes.button} color="primary" onClick={this.hideItem.bind(this)}>Hide something for a friend</Button>}
+              }, 1, 0)}m away...</Typography> : <Button variant="outlined" className={classes.button} color="primary" onClick={this.hideItem.bind(this)}>Hide something for a friend</Button>}
         </Grid>
         <MyMap
           finderMode={this.state.finderMode}
