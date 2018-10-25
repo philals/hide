@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.3.1",
+    "caesar-encrypt": "0.0.2",
     "copy-to-clipboard": "^3.0.8",
     "geolib": "^2.0.24",
     "history": "^4.7.2",

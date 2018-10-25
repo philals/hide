@@ -5,6 +5,7 @@ import copy from "copy-to-clipboard";
 import geolib from "geolib";
 import React from "react";
 import { addUrlProps, UrlQueryParamTypes } from "react-url-query";
+import { decrypt, encrypt } from "./crypto";
 import MyMap from "./MyMap";
 
 const styles = theme => ({
@@ -46,26 +47,32 @@ class MapState extends React.Component {
   }
 
   hideItem() {
+    let lat = encodeURIComponent(encrypt(this.state.newItemToHideLatLng.lat));
+    let lng = encodeURIComponent(encrypt(this.state.newItemToHideLatLng.lng));
+
     let newUrl =
       window.location.href.substring(0, window.location.href.lastIndexOf("/")) +
-      `/?hiddenItemLat=${this.state.newItemToHideLatLng.lat}&hiddenItemLng=${
-        this.state.newItemToHideLatLng.lng
-      }`;
+      `/?hiddenItemLat=${lat}&hiddenItemLng=${lng}`;
     copy(newUrl);
   }
 
   render() {
     const { classes } = this.props;
 
+    if (this.state.finderMode) {
+      debugger;
+    }
+
     let distanceToGo = this.state.finderMode
       ? geolib.getDistance(
           {
             latitude: this.props.coords.latitude,
+
             longitude: this.props.coords.longitude
           },
           {
-            longitude: this.props.hiddenItemLng,
-            latitude: this.props.hiddenItemLat
+            longitude: decodeURIComponent(decrypt(this.props.hiddenItemLng)),
+            latitude: decodeURIComponent(decrypt(this.props.hiddenItemLat))
           },
           1,
           0
@@ -123,8 +130,8 @@ class MapState extends React.Component {
  * parameters should be read (this defaults to the prop name if not provided).
  */
 const urlPropsQueryConfig = {
-  hiddenItemLng: { type: UrlQueryParamTypes.number },
-  hiddenItemLat: { type: UrlQueryParamTypes.number }
+  hiddenItemLng: { type: UrlQueryParamTypes.string },
+  hiddenItemLat: { type: UrlQueryParamTypes.string }
 };
 
 let st = withStyles(styles)(MapState);

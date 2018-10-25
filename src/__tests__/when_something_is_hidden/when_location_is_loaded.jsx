@@ -30,8 +30,8 @@ jest.mock("react-url-query", () => ({
     return function(component) {
       component.defaultProps = {
         ...component.defaultProps,
-        hiddenItemLat: 10.32,
-        hiddenItemLng: 10.45
+        hiddenItemLat: ".282/3589:9618974", // Encrypted, encoded value
+        hiddenItemLng: ".282/3589:9618974"
       };
       return component;
     };
@@ -63,7 +63,9 @@ describe("when something is hidden", () => {
       test("it gives a clue to how close you are", () => {
         const { getByText } = renderWithLocation();
 
-        getByText("Something is hidden for you. It's 60701m away. Go find it!");
+        getByText(
+          "Something is hidden for you. It's 17925781m away. Go find it!"
+        );
       });
     });
   });

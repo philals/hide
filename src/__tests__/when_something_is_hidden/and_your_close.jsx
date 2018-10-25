@@ -30,8 +30,8 @@ jest.mock("react-url-query", () => ({
     return function(component) {
       component.defaultProps = {
         ...component.defaultProps,
-        hiddenItemLat: 10,
-        hiddenItemLng: 10
+        hiddenItemLat: "21", // Encrypted and encoded value
+        hiddenItemLng: "21"
       };
       return component;
     };

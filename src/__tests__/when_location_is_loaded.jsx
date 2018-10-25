@@ -1,6 +1,7 @@
 import copy from "copy-to-clipboard";
 import { fireEvent } from "react-testing-library";
 import "react-testing-library/cleanup-after-each";
+import { encrypt } from "../crypto";
 import { renderWithLocation } from "../__test_util__/renderWithLocation";
 
 jest.mock("copy-to-clipboard");
@@ -46,7 +47,9 @@ describe("while location is loaded", () => {
       );
 
       expect(copy).toBeCalledWith(
-        `http://localhost/?hiddenItemLat=10&hiddenItemLng=10`
+        `http://localhost/?hiddenItemLat=${encodeURIComponent(
+          encrypt(10)
+        )}&hiddenItemLng=${encodeURIComponent(encrypt(10))}`
       );
     });
   });
