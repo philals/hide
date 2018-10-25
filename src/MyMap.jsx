@@ -29,7 +29,7 @@ export default class MyMap extends Component {
       html: iconMarkup
     });
 
-    let mapLink = '<a href="http://www.esri.com/">Esri</a>';
+    let mapLink = '<a href="https://www.esri.com/">Esri</a>';
     let wholink =
       "i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community";
 
@@ -41,7 +41,7 @@ export default class MyMap extends Component {
           zoom={13}
         >
           <TileLayer
-            url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
             attribution={"&copy; " + mapLink + ", " + wholink}
             // maxZoom={1}
           />
