@@ -41,12 +41,13 @@ describe("while location is loaded", () => {
     test("allows user to copy game url", () => {
       const { getByText } = renderWithLocation();
 
-      fireEvent.click(getByText("Hide something, and copy this link to a friend"));
+      fireEvent.click(
+        getByText("Then click here to copy this link and send to a friend")
+      );
 
       expect(copy).toBeCalledWith(
         `http://localhost/?hiddenItemLat=10&hiddenItemLng=10`
       );
     });
-
   });
 });
