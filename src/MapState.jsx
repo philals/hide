@@ -70,13 +70,17 @@ class MapState extends React.Component {
           1,
           0
         )
-      : null;
+      : 999999;
 
     let topMessage = this.state.finderMode
       ? `Something is hidden for you. It's ${distanceToGo}m away. Go find
       it!`
       : `Move the blue marker around to the location you would like to
       hide something.`;
+
+    if (distanceToGo < 10) {
+      topMessage = "Well done. You should be there!";
+    }
 
     return (
       <div>
