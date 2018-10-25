@@ -66,7 +66,7 @@ describe("when something is hidden", () => {
       test("it gives a clue to how close you are", () => {
         const { getByText } = renderWithLocation();
 
-        getByText("Distance to hidden item: 60701 m");
+        getByText("Something is hidden for you. It's 60701m away...");
       });
     });
   });

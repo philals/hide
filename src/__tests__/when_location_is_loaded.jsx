@@ -41,7 +41,7 @@ describe("while location is loaded", () => {
     test("saves the state of the game", () => {
       const { getByText } = renderWithLocation();
 
-      fireEvent.click(getByText("Hide something"));
+      fireEvent.click(getByText("Hide something for a friend"));
 
       expect(history.push).toBeCalledWith(
         `/?hiddenItemLat=${10}&hiddenItemLng=${10}`,
