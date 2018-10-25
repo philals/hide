@@ -1,10 +1,10 @@
 import { Grid, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import copy from 'copy-to-clipboard';
 import geolib from 'geolib';
 import React from "react";
 import { addUrlProps, UrlQueryParamTypes } from "react-url-query";
-import history from "./history";
 import MyMap from "./MyMap";
 
 const styles = theme => ({
@@ -47,7 +47,7 @@ class MapState extends React.Component {
 
   hideItem() {
     let newUrl = `/?hiddenItemLat=${this.state.newItemToHideLatLng.lat}&hiddenItemLng=${this.state.newItemToHideLatLng.lng}`;
-    history.push(newUrl, { some: "state" });
+    copy(newUrl)
   }
 
   render() {
@@ -62,7 +62,7 @@ class MapState extends React.Component {
             }, {
                 longitude: this.props.hiddenItemLng,
                 latitude: this.props.hiddenItemLat
-              }, 1, 0)}m away...</Typography> : <Button variant="outlined" className={classes.button} color="primary" onClick={this.hideItem.bind(this)}>Hide something for a friend</Button>}
+              }, 1, 0)}m away...</Typography> : <Button variant="outlined" className={classes.button} color="primary" onClick={this.hideItem.bind(this)}>Hide something, and copy this link to a friend</Button>}
         </Grid>
         <MyMap
           finderMode={this.state.finderMode}

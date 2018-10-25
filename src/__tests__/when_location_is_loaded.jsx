@@ -1,9 +1,9 @@
+import copy from "copy-to-clipboard";
 import { fireEvent } from "react-testing-library";
 import "react-testing-library/cleanup-after-each";
-import history from "../history";
 import { renderWithLocation } from "../__test_util__/renderWithLocation";
 
-jest.mock("../history.js");
+jest.mock("copy-to-clipboard");
 
 jest.mock("react-geolocated", conf => ({
   geolocated: () => component => {
@@ -38,17 +38,15 @@ describe("while location is loaded", () => {
       getByAltText("Hidden Item");
     });
 
-    test("saves the state of the game", () => {
+    test("allows user to copy game url", () => {
       const { getByText } = renderWithLocation();
 
-      fireEvent.click(getByText("Hide something for a friend"));
+      fireEvent.click(getByText("Hide something, and copy this link to a friend"));
 
-      expect(history.push).toBeCalledWith(
-        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`,
-        {
-          some: "state"
-        }
+      expect(copy).toBeCalledWith(
+        `/?hiddenItemLat=${10}&hiddenItemLng=${10}`
       );
     });
+
   });
 });
