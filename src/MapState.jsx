@@ -56,25 +56,29 @@ class MapState extends React.Component {
 
   render() {
     const { classes } = this.props;
+
+    let distanceToGo = this.state.finderMode
+      ? geolib.getDistance(
+          {
+            latitude: this.props.coords.latitude,
+            longitude: this.props.coords.longitude
+          },
+          {
+            longitude: this.props.hiddenItemLng,
+            latitude: this.props.hiddenItemLat
+          },
+          1,
+          0
+        )
+      : null;
+
     return (
       <div>
         <Grid container justify="center">
           {this.state.finderMode ? (
             <Typography variant="h5" gutterBottom>
-              Something is hidden for you. It's{" "}
-              {geolib.getDistance(
-                {
-                  latitude: this.props.coords.latitude,
-                  longitude: this.props.coords.longitude
-                },
-                {
-                  longitude: this.props.hiddenItemLng,
-                  latitude: this.props.hiddenItemLat
-                },
-                1,
-                0
-              )}
-              m away. Go find it!
+              Something is hidden for you. It's {distanceToGo}m away. Go find
+              it!
             </Typography>
           ) : (
             <div>
