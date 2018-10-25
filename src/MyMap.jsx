@@ -14,11 +14,11 @@ export default class MyMap extends Component {
     this.state.center = [
       this.props.currentLocation.lat,
       this.props.currentLocation.lng
-    ]
+    ];
   }
 
   mapMoved(what) {
-    this.props.updateLocationOfHiddenItem(what.target.getCenter())
+    this.props.updateLocationOfHiddenItem(what.target.getCenter());
   }
 
   render() {
@@ -29,6 +29,10 @@ export default class MyMap extends Component {
       html: iconMarkup
     });
 
+    let mapLink = '<a href="http://www.esri.com/">Esri</a>';
+    let wholink =
+      "i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community";
+
     return (
       <div className="map-container">
         <Map
@@ -36,7 +40,11 @@ export default class MyMap extends Component {
           center={this.state.center}
           zoom={13}
         >
-          <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+          <TileLayer
+            url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution={"&copy; " + mapLink + ", " + wholink}
+            // maxZoom={1}
+          />
 
           {/* //TODO: Offset this lcon */}
           <Marker
