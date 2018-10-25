@@ -74,7 +74,7 @@ class MapState extends React.Component {
                 1,
                 0
               )}
-              m away...
+              m away. Go find it!
             </Typography>
           ) : (
             <div>

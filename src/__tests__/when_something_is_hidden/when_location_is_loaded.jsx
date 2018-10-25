@@ -39,7 +39,6 @@ jest.mock("react-url-query", () => ({
   UrlQueryParamTypes: { number: "mocked" }
 }));
 
-
 describe("when something is hidden", () => {
   describe("while location is loaded", () => {
     test("it displays your location marker", () => {
@@ -64,7 +63,7 @@ describe("when something is hidden", () => {
       test("it gives a clue to how close you are", () => {
         const { getByText } = renderWithLocation();
 
-        getByText("Something is hidden for you. It's 60701m away...");
+        getByText("Something is hidden for you. It's 60701m away. Go find it!");
       });
     });
   });
