@@ -16,6 +16,6 @@ describe("while location is loading", () => {
   test("display a loading message", () => {
     const { getByText } = renderWithLocation();
 
-    getByText("Getting the location data…");
+    getByText("Getting your location data…");
   });
 });

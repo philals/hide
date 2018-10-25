@@ -59,10 +59,6 @@ class MapState extends React.Component {
   render() {
     const { classes } = this.props;
 
-    if (this.state.finderMode) {
-      debugger;
-    }
-
     let distanceToGo = this.state.finderMode
       ? geolib.getDistance(
           {
