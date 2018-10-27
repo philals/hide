@@ -47,8 +47,8 @@ class MapState extends React.Component {
   }
 
   hideItem() {
-    let lat = encodeURIComponent(encrypt(this.state.newItemToHideLatLng.lat));
-    let lng = encodeURIComponent(encrypt(this.state.newItemToHideLatLng.lng));
+    let lat = encrypt(this.state.newItemToHideLatLng.lat);
+    let lng = encrypt(this.state.newItemToHideLatLng.lng);
 
     let newUrl =
       window.location.href.substring(0, window.location.href.lastIndexOf("/")) +
@@ -67,8 +67,8 @@ class MapState extends React.Component {
             longitude: this.props.coords.longitude
           },
           {
-            longitude: decodeURIComponent(decrypt(this.props.hiddenItemLng)),
-            latitude: decodeURIComponent(decrypt(this.props.hiddenItemLat))
+            longitude: decrypt(this.props.hiddenItemLng),
+            latitude: decrypt(this.props.hiddenItemLat)
           },
           1,
           0
