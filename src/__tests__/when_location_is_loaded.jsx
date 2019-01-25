@@ -43,7 +43,7 @@ describe("while location is loaded", () => {
       const { getByText } = renderWithLocation();
 
       fireEvent.click(
-        getByText("Then click here to copy this link and send to a friend")
+        getByText("Then click here to copy a link and send to a friend")
       );
 
       expect(copy).toBeCalledWith(

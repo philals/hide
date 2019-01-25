@@ -14,6 +14,11 @@ const styles = theme => ({
   },
   input: {
     display: "none"
+  },
+  githubBanner: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
   }
 });
 
@@ -61,18 +66,18 @@ class MapState extends React.Component {
 
     let distanceToGo = this.state.finderMode
       ? geolib.getDistance(
-          {
-            latitude: this.props.coords.latitude,
+        {
+          latitude: this.props.coords.latitude,
 
-            longitude: this.props.coords.longitude
-          },
-          {
-            longitude: decrypt(this.props.hiddenItemLng),
-            latitude: decrypt(this.props.hiddenItemLat)
-          },
-          1,
-          0
-        )
+          longitude: this.props.coords.longitude
+        },
+        {
+          longitude: decrypt(this.props.hiddenItemLng),
+          latitude: decrypt(this.props.hiddenItemLat)
+        },
+        1,
+        0
+      )
       : 999999;
 
     let topMessage = this.state.finderMode
@@ -88,21 +93,24 @@ class MapState extends React.Component {
     return (
       <div>
         <Grid container justify="center">
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h6" align="center">
             {topMessage}
           </Typography>
-          <br />
-          {!this.state.finderMode ? (
+        </Grid>
+
+        {!this.state.finderMode ? (
+          <Grid container justify="center">
             <Button
+              size="small"
               variant="outlined"
               className={classes.button}
               color="primary"
               onClick={this.hideItem.bind(this)}
             >
-              Then click here to copy this link and send to a friend
+              Then click here to copy a link and send to a friend
             </Button>
-          ) : null}
-        </Grid>
+          </Grid>
+        ) : null}
         <MyMap
           finderMode={this.state.finderMode}
           currentLocation={{
